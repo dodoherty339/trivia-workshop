@@ -9,10 +9,10 @@ public class Game {
     private int[] purses  = new int[6];
     private boolean[] inPenaltyBox  = new boolean[6];
     
-    private LinkedList popQuestions = new LinkedList();
-    private LinkedList scienceQuestions = new LinkedList();
-    private LinkedList sportsQuestions = new LinkedList();
-    private LinkedList rockQuestions = new LinkedList();
+    private LinkedList<String> popQuestions = new LinkedList<String>();
+    private LinkedList<String> scienceQuestions = new LinkedList<String>();
+    private LinkedList<String> sportsQuestions = new LinkedList<String>();
+    private LinkedList<String> rockQuestions = new LinkedList<String>();
     
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
