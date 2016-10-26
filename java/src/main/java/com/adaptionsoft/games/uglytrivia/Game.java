@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    private ArrayList<String> players = new ArrayList<String>();
+    private ArrayList<String> players = new ArrayList<>();
     private int[] places = new int[6];
     private int[] purses  = new int[6];
     private boolean[] inPenaltyBox  = new boolean[6];
     
-    private LinkedList<String> popQuestions = new LinkedList<String>();
-    private LinkedList<String> scienceQuestions = new LinkedList<String>();
-    private LinkedList<String> sportsQuestions = new LinkedList<String>();
-    private LinkedList<String> rockQuestions = new LinkedList<String>();
+    private LinkedList<String> popQuestions = new LinkedList<>();
+    private LinkedList<String> scienceQuestions = new LinkedList<>();
+    private LinkedList<String> sportsQuestions = new LinkedList<>();
+    private LinkedList<String> rockQuestions = new LinkedList<>();
     
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
@@ -74,15 +74,22 @@ public class Game {
     }
 
     private void askQuestion() {
-        System.out.println("The category is " + currentCategory());
-		if (currentCategory().equals("Pop"))
-			System.out.println(popQuestions.removeFirst());
-		if (currentCategory().equals("Science"))
-			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory().equals("Sports"))
-			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory().equals("Rock"))
-			System.out.println(rockQuestions.removeFirst());		
+        final String category = currentCategory();
+        System.out.println("The category is " + category);
+        switch(category) {
+            case "Pop":
+                System.out.println(popQuestions.removeFirst());
+                break;
+            case "Science":
+                System.out.println(scienceQuestions.removeFirst());
+                break;
+            case "Sports":
+                System.out.println(sportsQuestions.removeFirst());
+                break;
+            case "Rock":
+                System.out.println(rockQuestions.removeFirst());
+                break;
+        }
 	}
 
 	private String currentCategory() {
