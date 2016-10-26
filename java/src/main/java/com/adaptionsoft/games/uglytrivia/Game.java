@@ -108,26 +108,19 @@ public class Game {
 	}
 
 	public boolean wasCorrectlyAnswered() {
-		if (inPenaltyBox[currentPlayer]){
-			if (isGettingOutOfPenaltyBox) {
-				rewardCorrectAnswer("Answer was correct!!!!");
-				
-				boolean winner = didPlayerWin();
-                advanceToNextPlayer();
-
-				return winner;
-			} else {
-                advanceToNextPlayer();
-				return true;
-			}
-		} else {
-			rewardCorrectAnswer("Answer was corrent!!!!");
-			
-			boolean winner = didPlayerWin();
+		if (inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox) {
             advanceToNextPlayer();
-			
-			return winner;
+            return true;
 		}
+
+        if (inPenaltyBox[currentPlayer]) {
+            rewardCorrectAnswer("Answer was correct!!!!");
+        } else {
+            rewardCorrectAnswer("Answer was corrent!!!!");
+        }
+        boolean winner = didPlayerWin();
+        advanceToNextPlayer();
+        return winner;
 	}
 
     private void advanceToNextPlayer() {
