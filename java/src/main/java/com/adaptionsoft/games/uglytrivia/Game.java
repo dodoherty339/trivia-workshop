@@ -50,13 +50,12 @@ public class Game {
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
-			if (roll % 2 != 0) {
+			if ((roll % 2) != 0) {
 				isGettingOutOfPenaltyBox = true;
 				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
                 advancePlayerPosition(roll);
 
-				System.out.println("The category is " + currentCategory());
 				askQuestion();
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -64,7 +63,6 @@ public class Game {
             }
 		} else {
             advancePlayerPosition(roll);
-			System.out.println("The category is " + currentCategory());
 			askQuestion();
 		}
 	}
@@ -78,6 +76,7 @@ public class Game {
     }
 
     private void askQuestion() {
+        System.out.println("The category is " + currentCategory());
 		if (currentCategory().equals("Pop"))
 			System.out.println(popQuestions.removeFirst());
 		if (currentCategory().equals("Science"))
