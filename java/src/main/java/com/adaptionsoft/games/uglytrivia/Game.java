@@ -26,7 +26,7 @@ public class Game {
     	}
     }
 
-	public String createRockQuestion(int index){
+	private String createRockQuestion(int index){
 		return "Rock Question " + index;
 	}
 	
@@ -45,7 +45,7 @@ public class Game {
 		return true;
 	}
 	
-	public int howManyPlayers() {
+	private int howManyPlayers() {
 		return players.size();
 	}
 
@@ -70,9 +70,7 @@ public class Game {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
 				}
-			
 		} else {
-		
 			places[currentPlayer] = places[currentPlayer] + roll;
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
 			
@@ -82,7 +80,6 @@ public class Game {
 			System.out.println("The category is " + currentCategory());
 			askQuestion();
 		}
-		
 	}
 
 	private void askQuestion() {
@@ -95,8 +92,7 @@ public class Game {
 		if (currentCategory().equals("Rock"))
 			System.out.println(rockQuestions.removeFirst());		
 	}
-	
-	
+
 	private String currentCategory() {
 		switch (places[currentPlayer]) {
 			case 0:
@@ -159,7 +155,6 @@ public class Game {
 		if (currentPlayer == players.size()) currentPlayer = 0;
 		return true;
 	}
-
 
 	private boolean didPlayerWin() {
 		return !(purses[currentPlayer] == 6);
