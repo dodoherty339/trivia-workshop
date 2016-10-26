@@ -113,27 +113,31 @@ public class Game {
 				rewardCorrectAnswer("Answer was correct!!!!");
 				
 				boolean winner = didPlayerWin();
-				currentPlayer++;
-				if (currentPlayer == players.size()) currentPlayer = 0;
-				
+                advanceToNextPlayer();
+
 				return winner;
 			} else {
-				currentPlayer++;
-				if (currentPlayer == players.size()) currentPlayer = 0;
+                advanceToNextPlayer();
 				return true;
 			}
 		} else {
 			rewardCorrectAnswer("Answer was corrent!!!!");
 			
 			boolean winner = didPlayerWin();
-			currentPlayer++;
-			if (currentPlayer == players.size()) currentPlayer = 0;
+            advanceToNextPlayer();
 			
 			return winner;
 		}
 	}
 
-	private void rewardCorrectAnswer(String message) {
+    private void advanceToNextPlayer() {
+        currentPlayer++;
+        if (currentPlayer == players.size()) {
+            currentPlayer = 0;
+        }
+    }
+
+    private void rewardCorrectAnswer(String message) {
 		System.out.println(message);
 		purses[currentPlayer]++;
 		System.out.println(players.get(currentPlayer)
@@ -146,9 +150,8 @@ public class Game {
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
 		inPenaltyBox[currentPlayer] = true;
-		
-		currentPlayer++;
-		if (currentPlayer == players.size()) currentPlayer = 0;
+
+        advanceToNextPlayer();
 		return true;
 	}
 
