@@ -52,16 +52,14 @@ public class Game {
 		if (inPenaltyBox[currentPlayer]) {
 			if (isOdd(roll)) {
 				isGettingOutOfPenaltyBox = true;
-				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-                advancePlayerPosition(roll);
-
-				askQuestion();
 			} else {
-				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
+                System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
             }
-		} else {
+		}
+
+        if (!inPenaltyBox[currentPlayer] || isGettingOutOfPenaltyBox) {
             advancePlayerPosition(roll);
 			askQuestion();
 		}
