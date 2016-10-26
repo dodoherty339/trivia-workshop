@@ -1,32 +1,40 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Game {
     private ArrayList<String> players = new ArrayList<>();
     private int[] places = new int[6];
     private int[] purses  = new int[6];
     private boolean[] inPenaltyBox  = new boolean[6];
-    
-    private LinkedList<String> popQuestions = new LinkedList<>();
-    private LinkedList<String> scienceQuestions = new LinkedList<>();
-    private LinkedList<String> sportsQuestions = new LinkedList<>();
-    private LinkedList<String> rockQuestions = new LinkedList<>();
-    
+
+    private List<String> categories = new ArrayList<>();
+    private Map<String, List<String>> questions = new HashMap<>();
+
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
     
-    public Game(){
+    public Game() {
+        List<String> popQuestions = new ArrayList<>();
+        List<String> scienceQuestions = new ArrayList<>();
+        List<String> sportsQuestions = new ArrayList<>();
+        List<String> rockQuestions = new ArrayList<>();
     	for (int i = 0; i < 50; i++) {
-			popQuestions.addLast("Pop Question " + i);
-			scienceQuestions.addLast("Science Question " + i);
-			sportsQuestions.addLast("Sports Question " + i);
-			rockQuestions.addLast("Rock Question " + i);
+			popQuestions.add("Pop Question " + i);
+			scienceQuestions.add("Science Question " + i);
+			sportsQuestions.add("Sports Question " + i);
+			rockQuestions.add("Rock Question " + i);
     	}
+    	addCategory("Pop", popQuestions);
+        addCategory("Science", scienceQuestions);
+        addCategory("Sports", sportsQuestions);
+        addCategory("Rock", rockQuestions);
     }
 
-	public boolean add(String playerName) {
+	public void add(String playerName) {
 	    players.add(playerName);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
@@ -34,8 +42,12 @@ public class Game {
 	    
 	    System.out.println(playerName + " was added");
 	    System.out.println("They are player number " + players.size());
-		return true;
 	}
+
+	public void addCategory(String name, List<String> questions) {
+        categories.add(name);
+        this.questions.put(name, new ArrayList<>(questions));
+    }
 	
 	private int howManyPlayers() {
 		return players.size();
@@ -76,38 +88,12 @@ public class Game {
     private void askQuestion() {
         final String category = currentCategory();
         System.out.println("The category is " + category);
-        switch(category) {
-            case "Pop":
-                System.out.println(popQuestions.removeFirst());
-                break;
-            case "Science":
-                System.out.println(scienceQuestions.removeFirst());
-                break;
-            case "Sports":
-                System.out.println(sportsQuestions.removeFirst());
-                break;
-            case "Rock":
-                System.out.println(rockQuestions.removeFirst());
-                break;
-        }
+        System.out.println(questions.get(category).remove(0));
 	}
 
 	private String currentCategory() {
-		switch (places[currentPlayer]) {
-			case 0:
-			case 4:
-			case 8:
-				return "Pop";
-			case 1:
-			case 5:
-			case 9:
-				return "Science";
-			case 2:
-			case 6:
-			case 10:
-				return "Sports";
-			default: return "Rock";
-		}
+        final int categoryIndex = places[currentPlayer] % categories.size();
+        return categories.get(categoryIndex);
 	}
 
 	public boolean wasCorrectlyAnswered() {
