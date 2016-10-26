@@ -143,8 +143,8 @@ public class Game {
 		}
 	}
 
-	private void rewardCorrectAnswer(String s) {
-		System.out.println(s);
+	private void rewardCorrectAnswer(String message) {
+		System.out.println(message);
 		purses[currentPlayer]++;
 		System.out.println(players.get(currentPlayer)
 				+ " now has "
